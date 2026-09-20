@@ -43,7 +43,7 @@ spec:
   tls:
     - hosts:
         - drewysq.mywire.org
-      secretName: drewysq-mywire-org-tls
+      secretName: drewysq-mywire-org-homepage-tls
   rules:
     - host: drewysq.mywire.org
       http:

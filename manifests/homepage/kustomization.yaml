@@ -3,6 +3,7 @@ kind: Kustomization
 metadata:
   name: certs
 resources:
+  - homepage.yaml
   - cert.yaml
 images:
   - name: homelab:5001/web
