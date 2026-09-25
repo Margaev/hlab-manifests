@@ -1,0 +1,19 @@
+version: "3"
+
+vars:
+  GARAGE_REPO: https://git.deuxfleurs.fr/Deuxfleurs/garage.git
+  GARAGE_SOURCE_PATH: script/helm/garage
+  GARAGE_TARGET_PATH: manifests/garage
+  GARAGE_TMP_PATH: .tmp/garage
+
+tasks:
+  garage:fetch:
+    desc: Fetch the Garage Helm chart from upstream
+    cmds:
+      - defer: rm -rf {{.GARAGE_TMP_PATH}}
+      - rm -rf {{.GARAGE_TMP_PATH}}
+      - git clone --depth=1 --filter=blob:none --sparse {{.GARAGE_REPO}} {{.GARAGE_TMP_PATH}}
+      - git -C {{.GARAGE_TMP_PATH}} sparse-checkout set {{.GARAGE_SOURCE_PATH}}
+      - rm -rf {{.GARAGE_TARGET_PATH}}
+      - mkdir -p {{.GARAGE_TARGET_PATH}}
+      - cp -a {{.GARAGE_TMP_PATH}}/{{.GARAGE_SOURCE_PATH}}/. {{.GARAGE_TARGET_PATH}}/
