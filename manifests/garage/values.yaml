@@ -1,3 +1,24 @@
+clusterConfig:
+  enabled: true
+
+  layout:
+    enabled: true
+    zone: dc1
+    capacity: 1Gi
+
+  buckets:
+    - name: loki
+
+  keys:
+    loki:
+      secretName: garage-loki
+      keyId: access-key
+      secretKey: secret-key
+      buckets:
+        - name: loki
+          read: true
+          write: true
+
 # Default values for garage.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -208,16 +229,16 @@ ingress:
         # kubernetes.io/tls-acme: "true"
       labels: {}
       hosts:
-      # --  wildcard website access with bucket name prefix
-       - host: "*.web.garage.tld"
-         paths:
-           - path: /
-             pathType: Prefix
-       # -- specific bucket access with FQDN bucket
-       - host: "mywebpage.example.com"
-         paths:
-           - path: /
-             pathType: Prefix
+        # --  wildcard website access with bucket name prefix
+        - host: "*.web.garage.tld"
+          paths:
+            - path: /
+              pathType: Prefix
+        # -- specific bucket access with FQDN bucket
+        - host: "mywebpage.example.com"
+          paths:
+            - path: /
+              pathType: Prefix
       tls: []
       #  - secretName: my-garage-cluster-tls
       #    hosts:

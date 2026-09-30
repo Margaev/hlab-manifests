@@ -1,0 +1,17 @@
+version: "3"
+
+tasks:
+  garage:
+    cmds:
+      - kubectl exec -n garage garage-0 -- /garage {{.CLI_ARGS}}
+
+  garage:layout:
+    desc: Configure and apply the Garage cluster layout
+    env:
+      GARAGE_NAMESPACE: garage
+      GARAGE_STATEFULSET: garage
+      GARAGE_ADMIN_POD: garage-0
+      GARAGE_ZONE: dc1
+      GARAGE_CAPACITY: 1G
+    cmds:
+      - ./scripts/garage-layout.sh

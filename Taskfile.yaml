@@ -6,6 +6,11 @@ vars:
   GARAGE_TARGET_PATH: manifests/garage
   GARAGE_TMP_PATH: .tmp/garage
 
+includes:
+  apps:
+    taskfile: ./apps/Taskfile.yaml
+    dir: ./apps/
+
 tasks:
   garage:fetch:
     desc: Fetch the Garage Helm chart from upstream

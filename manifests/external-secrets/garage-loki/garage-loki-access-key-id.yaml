@@ -1,0 +1,11 @@
+apiVersion: generators.external-secrets.io/v1alpha1
+kind: Password
+metadata:
+  name: garage-loki-access-key
+  namespace: garage
+spec:
+  length: 24
+  encoding: hex
+  allowRepeat: true
+  secretKeys:
+    - keyId
