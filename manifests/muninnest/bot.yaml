@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: muninnest
 spec:
-  replicas: 0
+  replicas: 1
   strategy:
     type: Recreate
   selector:
@@ -45,7 +45,7 @@ spec:
               value: "4"
             # Required before activation: restrict to your Telegram user ID(s).
             - name: ALLOWED_USER_IDS
-              value: "0"
+              value: "394235531"
           resources:
             requests:
               cpu: "1"
