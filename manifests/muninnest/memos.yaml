@@ -14,10 +14,14 @@ spec:
       labels:
         app: memos
     spec:
+      enableServiceLinks: false
       terminationGracePeriodSeconds: 30
       containers:
         - name: memos
           image: neosmemo/memos:0.31.0
+          env:
+            - name: MEMOS_PORT
+              value: "5230"
           ports:
             - name: http
               containerPort: 5230
