@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: muninnest
+spec:
+  replicas: 0
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: muninnest
+  template:
+    metadata:
+      labels:
+        app: muninnest
+    spec:
+      terminationGracePeriodSeconds: 120
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        fsGroup: 10001
+        fsGroupChangePolicy: OnRootMismatch
+      containers:
+        - name: bot
+          image: homelab:5001/muninnest:0.1.0
+          env:
+            - name: TELEGRAM_BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: muninnest-secrets
+                  key: TELEGRAM_BOT_TOKEN
+            - name: MODEL_DIR
+              value: /models/sherpa-onnx-nemo-parakeet-tdt-0.6b-v3-int8
+            - name: STORAGE_BACKEND
+              value: memos
+            - name: MEMOS_URL
+              value: http://memos:5230
+            - name: MEMOS_ACCESS_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: muninnest-secrets
+                  key: MEMOS_ACCESS_TOKEN
+            - name: ASR_THREADS
+              value: "4"
+            # Required before activation: restrict to your Telegram user ID(s).
+            - name: ALLOWED_USER_IDS
+              value: "0"
+          resources:
+            requests:
+              cpu: "1"
+              memory: 2Gi
+            limits:
+              cpu: "4"
+              memory: 8Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: models
+              mountPath: /models
+      volumes:
+        - name: models
+          persistentVolumeClaim:
+            claimName: muninnest-models

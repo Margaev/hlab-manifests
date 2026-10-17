@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: memos
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts:
+        - muninn.drewysq.mywire.org
+      secretName: memos-tls
+  rules:
+    - host: muninn.drewysq.mywire.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: memos
+                port:
+                  number: 5230
