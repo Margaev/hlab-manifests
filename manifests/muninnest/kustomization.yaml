@@ -7,3 +7,14 @@ resources:
   - storage.yaml
   - ingress.yaml
   - certificate.yaml
+  - bootstrap.yaml
+generators:
+  - secrets-generator.yaml
+configMapGenerator:
+  - name: memos-bootstrap-script
+    files:
+      - bootstrap.py
+    options:
+      disableNameSuffixHash: true
+      annotations:
+        argocd.argoproj.io/sync-wave: "-1"

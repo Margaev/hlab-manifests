@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: muninnest-bootstrap
+    namespace: muninnest
+    annotations:
+        argocd.argoproj.io/sync-wave: "-1"
+type: Opaque
+stringData:
+    MEMOS_USERNAME: ENC[AES256_GCM,data:HUSX8VNhCQ==,iv:NvNbyc5pcjj9BBgnjVPit9+whibts2xGXy2NtJtQgBM=,tag:Y3gJR8RDu5eXBOf3P3vwHA==,type:str]
+    MEMOS_PASSWORD: ENC[AES256_GCM,data:K6nLVSKZsKxhQs4=,iv:p4pcgB08k7vgG66RzRFB7IvqU8HX++M9EUpQMba7YgM=,tag:HRQbWGZ97PmhOSeRAiy5Ew==,type:str]
+    TELEGRAM_BOT_TOKEN: ENC[AES256_GCM,data:UWaPw4gKCK20qag9VeL7DzgvZuV66tVYl46MD7awntat2RD+2Lme/XGm5jouoQ==,iv:z4bySTeNOS9J4Z+G5OJCmHIpivqaOS3RhMSxRCii6HA=,tag:xP90g1agEOMdKsiZ1Qzq/g==,type:str]
+sops:
+    age:
+        - enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBQanhKOVh4VEJMVkJKcitH
+            ckpjc1dkWWdTNXN0enBldW5mMlF0VXNIcEJjCnYzMWFQaTVMRXhpRjFSaTA1emxp
+            RmMyckFpczB5dmJSVXVxZm1VVzd3TmMKLS0tIGVUOGpubVVYaGRFQWdPcjRqb2ZH
+            cGYyWllGY2JNcXRuL0JxTWpkK3FWT0UKifzgshj9HoqmmQeM0c80eUzP1hJ1GdXD
+            5imHr0Vi3QdBVZcw4iPOd9X+WgPSU2nL1ng4B/M8g1oaUSu9TdG0Cw==
+            -----END AGE ENCRYPTED FILE-----
+          recipient: age1st9pdr9wvwrw96unkjzw2449puqn0pau2qy8z0n787cmjpyn0qps4raaec
+    encrypted_regex: ^(data|stringData)$
+    lastmodified: "2026-10-18T15:57:01Z"
+    mac: ENC[AES256_GCM,data:qfxqUFRwZM7+0ajTi/U7ZXuf+zduTi4H7nGeAjget2XrYCNLCnhng5HC7DM2cyGYGdnR9prpLzyWzIO2/xOzShKB7Fb//14DXxChAoVCKTHjyGCHsa3t0BLLbDy9ajca2ZF9hI3lxIEujvfK20CBvOBYUgHIQjZ8CQscRKbEwwU=,iv:/waIC/2NTtra8g3juDDSIkgYyqMpww0Xzh4bu+9AMVY=,tag:wU57PRXYlJrjbgaqW2nbzw==,type:str]
+    version: 3.13.3
